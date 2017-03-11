@@ -35,10 +35,19 @@ object Main {
           else checkParenBalance(chars.tail, open)
         }
       }
+      checkParenBalance(chars, 0)
     }
   
   /**
    * Exercise 3
    */
-    //def countChange(money: Int, coins: List[Int]): Int = ???
+    def countChange(money: Int, coins: List[Int]): Int = {
+      if (money <= 0) 0
+      def sortedCountChange(money: Int, sortedCoins: List[Int]): Int = {
+        if (sortedCoins.isEmpty || money - sortedCoins.head < 0) 0 //coins empty or if coins[0] is
+        else if (money - sortedCoins.head == 0) 1
+        else sortedCountChange(money, sortedCoins.tail) + sortedCountChange(money - sortedCoins.head, sortedCoins)
+      }
+      sortedCountChange(money, coins.sorted) //sort input coins array
+    }
   }
